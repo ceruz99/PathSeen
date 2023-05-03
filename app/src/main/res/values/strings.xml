@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">PathSeen</string>
+    <string name="register_form">Register Form</string>
+    <string name="helperText">*Required</string>
+    <string name="Name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="Repassword">Confirm password</string>
+    <string name="Favorite_genres">Favorite genres</string>
+    <string name="drama">Drama</string>
+    <string name="Crime">Crime</string>
+    <string name="Thriller">Thriller</string>
+    <string name="Action">Action</string>
+    <string name="Register">Register</string>
+    <string name="login">Login</string>
+</resources>
