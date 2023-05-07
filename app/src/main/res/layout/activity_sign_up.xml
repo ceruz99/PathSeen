@@ -46,9 +46,9 @@
                 android:layout_marginTop="8dp"
                 android:hint="@string/Name"
                 android:padding="10dp"
-                android:textColor="@color/white"
-                android:textColorHighlight="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -66,9 +66,9 @@
                 android:layout_marginTop="8dp"
                 android:hint="@string/email"
                 android:padding="10dp"
-                android:textColor="@color/white"
-                android:textColorHighlight="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -87,9 +87,9 @@
                 android:drawableStart="@android:drawable/ic_lock_idle_lock"
                 android:hint="@string/password"
                 android:padding="10dp"
-                android:textColor="@color/white"
-                android:textColorHighlight="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -108,9 +108,9 @@
                 android:drawableStart="@android:drawable/ic_lock_idle_lock"
                 android:hint="@string/Repassword"
                 android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHighlight="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -118,8 +118,10 @@
             android:id="@+id/favorite_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="40dp"
             android:text="@string/Favorite_genres"
+            android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="20dp" />
 
         <CheckBox
