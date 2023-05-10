@@ -25,6 +25,6 @@
     <fragment
         android:id="@+id/navigation_movies"
         android:name="com.example.pathseen.ui.Movies.MoviesFragment"
-        android:label="MoviesFragment"
+        android:label="@string/tittle_movies"
         tools:layout="@layout/fragment_movies"/>
 </navigation>

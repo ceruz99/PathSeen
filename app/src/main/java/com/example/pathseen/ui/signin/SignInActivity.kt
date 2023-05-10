@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.pathseen.R
 import com.example.pathseen.databinding.ActivitySignInBinding
 import com.example.pathseen.ui.Books.BooksFragment
+import com.example.pathseen.ui.main.MainActivity
 import com.example.pathseen.ui.signup.SignUpActivity
 
 class SignInActivity : AppCompatActivity() {
@@ -28,7 +29,7 @@ class SignInActivity : AppCompatActivity() {
             val email= signInBinding.emailEditText.text.toString()
             val password= signInBinding.passwordEditText.text.toString()
             signInViewModel.validateFields(email,password)
-            //startActivity(Intent(this,BooksFragment::class.java))
+            startActivity(Intent(this,MainActivity::class.java))
         }
     }
 }
