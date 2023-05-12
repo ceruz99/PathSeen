@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class BooksViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is books Fragment"
+        value = "Aquí se almacenarán los libros leídos o por leer."
     }
     val text: LiveData<String> = _text
 }

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class GamesViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is games Fragment"
+        value = "Aquí se almacenarán los videojuegos jugados o por jugar."
     }
     val text: LiveData<String> = _text
 }

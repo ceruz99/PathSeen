@@ -27,6 +27,11 @@ class MoviesFragment : Fragment() {
         _binding = FragmentMoviesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val textView: TextView = binding.textMovies
+        moviesViewModel.text.observe(viewLifecycleOwner) {
+            textView.text = it
+        }
+
         return root
     }
 

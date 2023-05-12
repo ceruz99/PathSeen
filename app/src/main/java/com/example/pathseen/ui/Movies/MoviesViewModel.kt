@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class MoviesViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Movies Fragment"
+        value = "Aquí se almacenarán las películas vistas y por ver."
     }
     val text: LiveData<String> = _text
 }
