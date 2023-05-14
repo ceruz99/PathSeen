@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.pathseen.R
 import com.example.pathseen.databinding.FragmentBooksBinding
 
 
@@ -32,6 +34,11 @@ private var _binding: FragmentBooksBinding? = null
     booksViewModel.text.observe(viewLifecycleOwner) {
       textView.text = it
     }
+
+      binding.addBooksButton.setOnClickListener{
+          findNavController().navigate(R.id.action_navigation_books_to_addBooksFragment)
+      }
+
     return root
   }
 

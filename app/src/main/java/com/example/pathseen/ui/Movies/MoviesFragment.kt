@@ -7,7 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.pathseen.R
 import com.example.pathseen.databinding.FragmentMoviesBinding
+
+
+
 
 class MoviesFragment : Fragment() {
 
@@ -30,6 +35,10 @@ class MoviesFragment : Fragment() {
         val textView: TextView = binding.textMovies
         moviesViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
+        }
+
+        binding.addMoviesButton.setOnClickListener{
+            findNavController().navigate(R.id.action_navigation_movies_to_addMoviesFragment)
         }
 
         return root

@@ -9,13 +9,21 @@
         android:id="@+id/navigation_books"
         android:name="com.example.pathseen.ui.Books.BooksFragment"
         android:label="@string/title_books"
-        tools:layout="@layout/fragment_books" />
+        tools:layout="@layout/fragment_books" >
+        <action
+            android:id="@+id/action_navigation_books_to_addBooksFragment"
+            app:destination="@id/addBooksFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_games"
         android:name="com.example.pathseen.ui.Games.GamesFragment"
         android:label="@string/tittle_games"
-        tools:layout="@layout/fragment_games" />
+        tools:layout="@layout/fragment_games" >
+        <action
+            android:id="@+id/action_navigation_games_to_addGamesFragment"
+            app:destination="@id/addGamesFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_options"
@@ -26,5 +34,36 @@
         android:id="@+id/navigation_movies"
         android:name="com.example.pathseen.ui.Movies.MoviesFragment"
         android:label="@string/tittle_movies"
-        tools:layout="@layout/fragment_movies"/>
+        tools:layout="@layout/fragment_movies">
+        <action
+            android:id="@+id/action_navigation_movies_to_addMoviesFragment"
+            app:destination="@id/addMoviesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBooksFragment"
+        android:name="com.example.pathseen.ui.AddBooks.AddBooksFragment"
+        android:label="@string/title_addbooks"
+        tools:layout="@layout/fragment_add_books" >
+        <action
+            android:id="@+id/action_addBooksFragment_to_navigation_books"
+            app:destination="@id/navigation_books" />
+    </fragment>
+    <fragment
+        android:id="@+id/addGamesFragment"
+        android:name="com.example.pathseen.ui.AddGames.AddGamesFragment"
+        android:label="@string/title_addgames"
+        tools:layout="@layout/fragment_add_games" >
+        <action
+            android:id="@+id/action_addGamesFragment_to_navigation_games"
+            app:destination="@id/navigation_games" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMoviesFragment"
+        android:name="com.example.pathseen.ui.AddMovies.AddMoviesFragment"
+        android:label="@string/title_addmovies"
+        tools:layout="@layout/fragment_add_movies" >
+        <action
+            android:id="@+id/action_addMoviesFragment_to_navigation_movies"
+            app:destination="@id/navigation_movies" />
+    </fragment>
 </navigation>
