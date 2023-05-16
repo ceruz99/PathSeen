@@ -12,6 +12,7 @@ import com.example.pathseen.ui.signin.SignInActivity
 
 class SignUpActivity : AppCompatActivity() {
 
+
     private lateinit var signUpBinding: ActivitySignUpBinding
     private lateinit var signUpViewModel: SignUpViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
