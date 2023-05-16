@@ -16,8 +16,8 @@ class SignUpViewModel: ViewModel() {
             _errorMsg.postValue("There are empty fields.")
         }
         else{
-            if(password!=repassword){
-                _errorMsg.postValue("The passwords writen are not equal.")
+            if(password!=repassword || password.length<=6 || repassword.length<=6){
+                _errorMsg.postValue("The passwords writen are not equal or they have less than 7 characters.")
             }
             else{
                 _isSuccessSignUp.postValue(true)
