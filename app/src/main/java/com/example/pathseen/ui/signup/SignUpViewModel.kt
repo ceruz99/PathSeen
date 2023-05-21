@@ -3,8 +3,13 @@ package com.example.pathseen.ui.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.pathseen.data.ResourceRemote
+import com.example.pathseen.data.UserRepository
+import kotlinx.coroutines.launch
 
 class SignUpViewModel: ViewModel() {
+    private val userRepository = UserRepository()
     private val _isSuccessSignUp: MutableLiveData<Boolean> = MutableLiveData()
     val isSuccessSignUp: LiveData<Boolean> = _isSuccessSignUp
 
@@ -20,7 +25,27 @@ class SignUpViewModel: ViewModel() {
                 _errorMsg.postValue("The passwords writen are not equal or they have less than 7 characters.")
             }
             else{
-                _isSuccessSignUp.postValue(true)
+                viewModelScope.launch {
+                    val result = userRepository.signUpUser(email,password)
+                    result.let{resourceRemote ->
+                        when(resourceRemote){
+                            is ResourceRemote.Success->{
+                                _isSuccessSignUp.postValue(true)
+                            }
+                            is ResourceRemote.Error->{
+                                var msg= resourceRemote.message
+                                when(resourceRemote.message){
+                                    "A network error (such as timeout, interrupted connection or unreachable host) has occurred." -> msg="There is not connection"
+                                    "The email address is already in use by another account." -> msg="There is an account already with that email."
+                                }
+                                _errorMsg.postValue(msg!!)
+                            }
+                            else ->{
+
+                            }
+                        }
+                    }
+                }
             }
         }
     }
