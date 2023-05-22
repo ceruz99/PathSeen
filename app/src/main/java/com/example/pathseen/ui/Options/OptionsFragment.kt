@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.pathseen.databinding.FragmentOptionsBinding
 import com.example.pathseen.ui.signin.SignInActivity
-import com.example.pathseen.ui.signup.SignUpActivity
 
 class OptionsFragment : Fragment() {
 
@@ -24,11 +23,24 @@ private var _binding: FragmentOptionsBinding? = null
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    val optionsViewModel =
-            ViewModelProvider(this).get(OptionsViewModel::class.java)
+    val optionsViewModel = ViewModelProvider(this).get(OptionsViewModel::class.java)
 
       _binding = FragmentOptionsBinding.inflate(inflater, container, false)
       val root: View = binding.root
+
+      optionsViewModel.errorMsg.observe(viewLifecycleOwner){errorMsg->
+          Toast.makeText(requireActivity(), errorMsg, Toast.LENGTH_LONG).show()
+      }
+
+      optionsViewModel.userLoaded.observe(viewLifecycleOwner){user->
+          with(binding){
+              uinfoTextView.text=user?.name
+              uemailTextView.text=user?.email
+              ugenresTextView.text=user?.genres
+          }
+      }
+
+      optionsViewModel.loadUserInfo()
 
       binding.buttonSignOut.setOnClickListener{
           optionsViewModel.signOut()

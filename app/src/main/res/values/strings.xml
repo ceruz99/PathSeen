@@ -47,4 +47,7 @@
     <string name="Fiction">Fiction</string>
     <string name="Costumbrismo">Costumbrismo</string>
     <string name="MagicRealism">Magic Realism</string>
+    <string name="nameExample"> </string>
+    <string name="emailExample"> </string>
+    <string name="genresExample"> </string>
 </resources>

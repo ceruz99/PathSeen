@@ -6,6 +6,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -41,10 +42,25 @@ class UserRepository {
         auth.signOut()
     }
 
+    fun getUIDCurrentUser(): String? {
+        return auth.currentUser?.uid
+    }
+
     suspend fun createUser(user: User): ResourceRemote<String?> {
         return try {
             user.uid?.let { db.collection("users").document(it).set(user).await() }
             ResourceRemote.Success(data=user.uid)
+        } catch (e: FirebaseAuthException){
+            ResourceRemote.Error(message = e.localizedMessage)
+        } catch(e:FirebaseNetworkException){
+            ResourceRemote.Error(message = e.localizedMessage)
+        }
+    }
+
+    suspend fun loadUserInfo(): ResourceRemote<QuerySnapshot> {
+        return try {
+            val result = db.collection("users").get().await()
+            ResourceRemote.Success(data = result)
         } catch (e: FirebaseAuthException){
             ResourceRemote.Error(message = e.localizedMessage)
         } catch(e:FirebaseNetworkException){
