@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pathseen.data.ResourceRemote
 import com.example.pathseen.data.UserRepository
+import com.example.pathseen.model.User
 import kotlinx.coroutines.launch
 
 class SignUpViewModel: ViewModel() {
@@ -16,7 +17,7 @@ class SignUpViewModel: ViewModel() {
     private val _errorMsg: MutableLiveData<String> = MutableLiveData()
     val errorMsg: LiveData<String> = _errorMsg
 
-    fun fields(name: String, email: String, password: String, repassword: String) {
+    fun fields(name: String, email: String, password: String, repassword: String, genres: String) {
         if(email.isEmpty() || name.isEmpty() || password.isEmpty() || repassword.isEmpty()){
             _errorMsg.postValue("There are empty fields.")
         }
@@ -30,7 +31,8 @@ class SignUpViewModel: ViewModel() {
                     result.let{resourceRemote ->
                         when(resourceRemote){
                             is ResourceRemote.Success->{
-                                _isSuccessSignUp.postValue(true)
+                                val user= User(uid = resourceRemote.data, name= name, email = email, genres = genres)
+                                createUser(user)
                             }
                             is ResourceRemote.Error->{
                                 var msg= resourceRemote.message
@@ -45,6 +47,26 @@ class SignUpViewModel: ViewModel() {
 
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun createUser(user: User) {
+        viewModelScope.launch {
+            val result = userRepository.createUser(user)
+            result.let{resourceRemote ->
+                when(resourceRemote){
+                    is ResourceRemote.Success ->{
+                        _isSuccessSignUp.postValue(true)
+                        _errorMsg.postValue("Successful registration.")
+                    }
+                    is ResourceRemote.Error ->{
+                        val msg= result.message
+                        _errorMsg.postValue(msg!!)
+                    }
+                    else -> {
                     }
                 }
             }

@@ -31,4 +31,20 @@
     <string name="info_addmovies">Aquí aparecerán las películas que se pueden guardar.</string>
     <string name="info_addgames">Aquí se encontrarán los videojuegos que se pueden guardar y puntuar.</string>
     <string name="info_addbooks">Aquí se encontrarán los libros que se desean guardar y puntuar.</string>
+    <string name="Adventure">Adventure</string>
+    <string name="Horror">Horror</string>
+    <string name="ScienceFiction">ScienceFiction</string>
+    <string name="Shooter">Shooter games</string>
+    <string name="Role">Role games</string>
+    <string name="Platform">Platform games</string>
+    <string name="Simulation">Simulation games</string>
+    <string name="Sports">Sports games</string>
+    <string name="Fighting">Fighting games</string>
+    <string name="Mystery">Mystery</string>
+    <string name="Historical">Historical</string>
+    <string name="Romance">Romance</string>
+    <string name="Western">Western</string>
+    <string name="Fiction">Fiction</string>
+    <string name="Costumbrismo">Costumbrismo</string>
+    <string name="MagicRealism">Magic Realism</string>
 </resources>

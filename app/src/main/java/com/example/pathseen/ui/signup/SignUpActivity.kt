@@ -36,12 +36,27 @@ class SignUpActivity : AppCompatActivity() {
             val password=signUpBinding.passwordEditText.text.toString()
             val repassword=signUpBinding.reppasswordEditText.text.toString()
             var genres=""
-            if(signUpBinding.crimeCheckbox.isChecked) genres += "Crime"
-            if(signUpBinding.dramaCheckbox.isChecked) genres += "Drama"
-            if(signUpBinding.thrillerCheckbox.isChecked) genres += "Thriller"
-            if(signUpBinding.otherCheckbox.isChecked) genres += "Action"
+            if(signUpBinding.crimeCheckbox.isChecked) genres += " Crime"
+            if(signUpBinding.dramaCheckbox.isChecked) genres += " Drama"
+            if(signUpBinding.thrillerCheckbox.isChecked) genres += " Thriller"
+            if(signUpBinding.otherCheckbox.isChecked) genres += " Action"
+            if(signUpBinding.adventureCheckbox.isChecked) genres += " Adventure"
+            if(signUpBinding.horrorCheckbox.isChecked) genres += " Horror"
+            if(signUpBinding.scienceFictionCheckbox.isChecked) genres += " Science Fiction"
+            if(signUpBinding.shooterCheckbox.isChecked) genres += " Shooter games"
+            if(signUpBinding.roleCheckbox.isChecked) genres += " Role games"
+            if(signUpBinding.platformCheckbox.isChecked) genres += " Platform games"
+            if(signUpBinding.simulationCheckbox.isChecked) genres += " Simulation games"
+            if(signUpBinding.sportsCheckbox.isChecked) genres += " Sports"
+            if(signUpBinding.mysteryCheckbox.isChecked) genres += " Mystery"
+            if(signUpBinding.historicalCheckbox.isChecked) genres += " Historical"
+            if(signUpBinding.RomanceCheckbox.isChecked) genres += " Romance"
+            if(signUpBinding.westernCheckbox.isChecked) genres += " Western"
+            if(signUpBinding.fictionCheckbox.isChecked) genres += " Fiction"
+            if(signUpBinding.costumbrismoCheckbox.isChecked) genres += " Costumbrismo"
+            if(signUpBinding.magicRealismCheckbox.isChecked) genres += " Magic Realism"
 
-            signUpViewModel.fields(name,email,password,repassword)
+            signUpViewModel.fields(name,email,password,repassword,genres)
 
         }
     }

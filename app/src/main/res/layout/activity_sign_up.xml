@@ -150,6 +150,96 @@
             android:layout_height="wrap_content"
             android:text="@string/Action" />
 
+        <CheckBox
+            android:id="@+id/adventure_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Adventure" />
+
+        <CheckBox
+            android:id="@+id/horror_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Horror" />
+
+        <CheckBox
+            android:id="@+id/scienceFiction_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ScienceFiction" />
+
+        <CheckBox
+            android:id="@+id/shooter_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Shooter" />
+
+        <CheckBox
+            android:id="@+id/role_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Role" />
+
+        <CheckBox
+            android:id="@+id/platform_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Platform" />
+
+        <CheckBox
+            android:id="@+id/simulation_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Simulation" />
+
+        <CheckBox
+            android:id="@+id/sports_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Sports" />
+
+        <CheckBox
+            android:id="@+id/mystery_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Mystery" />
+
+        <CheckBox
+            android:id="@+id/historical_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Historical" />
+
+        <CheckBox
+            android:id="@+id/Romance_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Romance" />
+
+        <CheckBox
+            android:id="@+id/western_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Western" />
+
+        <CheckBox
+            android:id="@+id/fiction_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Fiction" />
+
+        <CheckBox
+            android:id="@+id/costumbrismo_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Costumbrismo" />
+
+        <CheckBox
+            android:id="@+id/magicRealism_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/MagicRealism" />
+
 
         <Button
             android:id="@+id/register_button"
