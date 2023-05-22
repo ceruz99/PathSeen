@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import com.example.pathseen.R
+import com.example.pathseen.ui.main.MainActivity
 import com.example.pathseen.ui.signin.SignInActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class SplashActivity : AppCompatActivity() {
+    private var auth: FirebaseAuth = Firebase.auth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -22,8 +27,16 @@ class SplashActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                val intent = Intent(applicationContext, SignInActivity::class.java).apply{}
-                startActivity(intent);
+                if(auth.currentUser == null){
+                    val intent = Intent(applicationContext, SignInActivity::class.java).apply{}
+                    startActivity(intent);
+                    finish()
+                }
+                else{
+                    val intent = Intent(applicationContext, MainActivity::class.java).apply{}
+                    startActivity(intent);
+                    finish()
+                }
             }
 
         }.start()

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.pathseen.databinding.FragmentOptionsBinding
+import com.example.pathseen.ui.signin.SignInActivity
 import com.example.pathseen.ui.signup.SignUpActivity
 
 class OptionsFragment : Fragment() {
@@ -26,12 +27,15 @@ private var _binding: FragmentOptionsBinding? = null
     val optionsViewModel =
             ViewModelProvider(this).get(OptionsViewModel::class.java)
 
-    _binding = FragmentOptionsBinding.inflate(inflater, container, false)
-    val root: View = binding.root
+      _binding = FragmentOptionsBinding.inflate(inflater, container, false)
+      val root: View = binding.root
 
-      /*binding.buttonSignOut.setOnClickListener{
-          startActivity(Intent(this, SignUpActivity::class.java))
-      }*/
+      binding.buttonSignOut.setOnClickListener{
+          optionsViewModel.signOut()
+          val intent=Intent(activity, SignInActivity::class.java)
+          startActivity(intent)
+          activity?.finish()
+      }
 
     return root
   }

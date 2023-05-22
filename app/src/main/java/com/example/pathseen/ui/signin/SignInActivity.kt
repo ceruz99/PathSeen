@@ -25,6 +25,7 @@ class SignInActivity : AppCompatActivity() {
         signInViewModel.isSuccessSignIn.observe(this){
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         signInViewModel.errorMsg.observe(this){errorMsg->

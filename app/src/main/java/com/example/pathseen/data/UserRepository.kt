@@ -33,4 +33,8 @@ class UserRepository {
             ResourceRemote.Error(message = e.localizedMessage)
         }
     }
+
+    fun signOut() {
+        auth.signOut()
+    }
 }

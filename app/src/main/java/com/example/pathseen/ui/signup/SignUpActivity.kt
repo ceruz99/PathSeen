@@ -21,8 +21,9 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(view)
 
         signUpViewModel.isSuccessSignUp.observe(this){
-            val intent = Intent(this,SignInActivity::class.java)
-            startActivity(intent)
+            //val intent = Intent(this,SignInActivity::class.java)
+            //startActivity(intent)
+            onBackPressedDispatcher.onBackPressed()
         }
 
         signUpViewModel.errorMsg.observe(this){errorMsg->

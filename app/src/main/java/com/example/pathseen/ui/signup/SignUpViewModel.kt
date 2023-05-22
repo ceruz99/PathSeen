@@ -37,6 +37,7 @@ class SignUpViewModel: ViewModel() {
                                 when(resourceRemote.message){
                                     "A network error (such as timeout, interrupted connection or unreachable host) has occurred." -> msg="There is not connection"
                                     "The email address is already in use by another account." -> msg="There is an account already with that email."
+                                    "The email address is badly formatted" -> msg="The email address is badly written"
                                 }
                                 _errorMsg.postValue(msg!!)
                             }
