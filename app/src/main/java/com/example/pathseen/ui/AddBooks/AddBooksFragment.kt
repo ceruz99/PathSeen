@@ -5,56 +5,48 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.pathseen.R
+import com.example.pathseen.databinding.FragmentAddBooksBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AddBooksFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AddBooksFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
+    private var _binding: FragmentAddBooksBinding? = null
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_books, container, false)
+        _binding = FragmentAddBooksBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+        val addBooksViewModel = ViewModelProvider(this).get(AddBooksViewModel::class.java)
+
+        addBooksViewModel.errorMsg.observe(viewLifecycleOwner){errorMsg->
+            Toast.makeText(requireActivity(), errorMsg, Toast.LENGTH_LONG).show()
+        }
+
+        addBooksViewModel.createBookSuccess.observe(viewLifecycleOwner){
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.saveButton.setOnClickListener(){
+            val nameBook= binding.booksExampleEditText.text.toString()
+            val genreBook= binding.genreBooksEditText.text.toString()
+            val scoreBook= binding.scoreBooksEditText.text.toString()
+            addBooksViewModel.saveBook(nameBook,genreBook,scoreBook)
+            //findNavController().navigate(R.id.action_addBooksFragment_to_navigation_books)
+        }
+
+        return root
+
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddBooksFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddBooksFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

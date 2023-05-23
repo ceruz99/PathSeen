@@ -50,4 +50,8 @@
     <string name="nameExample"> </string>
     <string name="emailExample"> </string>
     <string name="genresExample"> </string>
+    <string name="booksExample">Here will be the name of the book.</string>
+    <string name="scoreExample">Here will be the score, it is optional.</string>
+    <string name="saveButton">Save</string>
+    <string name="genreExample">Here msut be the genre.</string>
 </resources>

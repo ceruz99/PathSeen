@@ -14,8 +14,6 @@ import com.example.pathseen.ui.signin.SignInActivity
 class OptionsFragment : Fragment() {
 
 private var _binding: FragmentOptionsBinding? = null
-  // This property is only valid between onCreateView and
-  // onDestroyView.
   private val binding get() = _binding!!
 
   override fun onCreateView(
