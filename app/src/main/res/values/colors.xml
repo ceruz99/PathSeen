@@ -10,4 +10,6 @@
     <color name="fondo">#48DB89</color>
     <color name="barras">#FF12A837</color>
     <color name="green_1">#00AD39</color>
+    <color name="greenCards">#88FC68</color>
+    <color name="green2">#429243</color>
 </resources>

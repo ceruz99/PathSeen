@@ -54,4 +54,7 @@
     <string name="scoreExample">Here will be the score, it is optional.</string>
     <string name="saveButton">Save</string>
     <string name="genreExample">Here msut be the genre.</string>
+    <string name="ejemplolibro">Stoner</string>
+    <string name="ejemplogenerolibro">Drama</string>
+    <string name="pending">Pending</string>
 </resources>
