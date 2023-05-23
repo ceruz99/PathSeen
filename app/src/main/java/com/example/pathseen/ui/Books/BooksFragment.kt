@@ -17,42 +17,41 @@ import com.example.pathseen.model.Book
 class BooksFragment : Fragment() {
 
 private var _binding: FragmentBooksBinding? = null
-  // This property is only valid between onCreateView and
-  // onDestroyView.
-  private val binding get() = _binding!!
-    private lateinit var booksAdapter: BooksAdapter
-    private var booksList: ArrayList<Book> = ArrayList()
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-    val booksViewModel = ViewModelProvider(this).get(BooksViewModel::class.java)
+      private val binding get() = _binding!!
+        private lateinit var booksAdapter: BooksAdapter
+        private var booksList: ArrayList<Book> = ArrayList()
 
-      _binding = FragmentBooksBinding.inflate(inflater, container, false)
-      val root: View = binding.root
+      override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val booksViewModel = ViewModelProvider(this).get(BooksViewModel::class.java)
+
+          _binding = FragmentBooksBinding.inflate(inflater, container, false)
+          val root: View = binding.root
 
 
-      binding.addBooksButton.setOnClickListener{
-          findNavController().navigate(R.id.action_navigation_books_to_addBooksFragment)
-      }
+          binding.addBooksButton.setOnClickListener{
+              findNavController().navigate(R.id.action_navigation_books_to_addBooksFragment)
+          }
 
-      booksAdapter= BooksAdapter(booksList,
-      onItemClicked = {  })
+          booksAdapter= BooksAdapter(booksList,
+          onItemClicked = {  })
 
-      binding.booksRecyclerView.apply{
-          layoutManager = LinearLayoutManager(this@BooksFragment.requireContext())
-          adapter=booksAdapter
-          setHasFixedSize(false)
-      }
+          binding.booksRecyclerView.apply{
+              layoutManager = LinearLayoutManager(this@BooksFragment.requireContext())
+              adapter=booksAdapter
+              setHasFixedSize(false)
+          }
 
-      booksViewModel.loadBooks()
+          booksViewModel.loadBooks()
 
-      booksViewModel.errorMsg.observe(viewLifecycleOwner){errorMsg->
-          Toast.makeText(requireContext(), errorMsg, Toast.LENGTH_LONG).show()
-      }
+          booksViewModel.errorMsg.observe(viewLifecycleOwner){errorMsg->
+              Toast.makeText(requireContext(), errorMsg, Toast.LENGTH_LONG).show()
+          }
 
-      booksViewModel.booksList.observe(viewLifecycleOwner){bookList->
-            booksAdapter.appendItems(bookList)
-      }
-    return root
+          booksViewModel.booksList.observe(viewLifecycleOwner){bookList->
+                booksAdapter.appendItems(bookList)
+          }
+        return root
   }
 
 override fun onDestroyView() {

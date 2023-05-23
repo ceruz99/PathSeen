@@ -57,4 +57,6 @@
     <string name="ejemplolibro">Stoner</string>
     <string name="ejemplogenerolibro">Drama</string>
     <string name="pending">Pending</string>
+    <string name="gamesExample">Here will be the name of the game from an API</string>
+    <string name="ejemploscore">4</string>
 </resources>

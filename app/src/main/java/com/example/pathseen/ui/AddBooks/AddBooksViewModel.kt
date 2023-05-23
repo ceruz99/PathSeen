@@ -20,7 +20,7 @@ class AddBooksViewModel: ViewModel() {
     val createBookSuccess: LiveData<String?> = _createBookSuccess
     fun saveBook(nameBook: String, genreBook: String,scoreBook: String){
         if(nameBook.isEmpty() || genreBook.isEmpty()){
-            _errorMsg.postValue("You must write an ID and a genre.")
+            _errorMsg.postValue("You must fulfill all the fields.")
         }
         else{
             viewModelScope.launch {

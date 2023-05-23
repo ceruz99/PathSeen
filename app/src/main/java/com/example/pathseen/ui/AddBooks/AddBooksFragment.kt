@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.example.pathseen.R
 import com.example.pathseen.databinding.FragmentAddBooksBinding
 
 class AddBooksFragment : Fragment() {
@@ -41,7 +39,6 @@ class AddBooksFragment : Fragment() {
             val genreBook= binding.genreBooksEditText.text.toString()
             val scoreBook= binding.scoreBooksEditText.text.toString()
             addBooksViewModel.saveBook(nameBook,genreBook,scoreBook)
-            //findNavController().navigate(R.id.action_addBooksFragment_to_navigation_books)
         }
 
         return root
