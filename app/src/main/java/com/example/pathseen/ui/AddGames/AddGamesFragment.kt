@@ -37,7 +37,7 @@ class AddGamesFragment : Fragment() {
             val nameGame= binding.gamesExampleEditText.text.toString()
             val genreGame= binding.genrGamesEditText.text.toString()
             val scoreGame= binding.scoreGamesEditText.text.toString()
-            addGamesViewModel.saveBook(nameGame,genreGame,scoreGame)
+            addGamesViewModel.saveGame(nameGame,genreGame,scoreGame)
         }
 
         return root

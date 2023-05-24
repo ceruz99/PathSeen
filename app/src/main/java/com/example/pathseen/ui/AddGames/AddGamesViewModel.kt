@@ -19,7 +19,7 @@ class AddGamesViewModel : ViewModel(){
     private val _createGameSuccess: MutableLiveData<String?> = MutableLiveData()
     val createGameSuccess: LiveData<String?> = _createGameSuccess
 
-    fun saveBook(nameGame: String, genreGame: String, scoreGame: String) {
+    fun saveGame(nameGame: String, genreGame: String, scoreGame: String) {
         if(nameGame.isEmpty() || genreGame.isEmpty()){
             _errorMsg.postValue("You must fulfill all the fields.")
         }
