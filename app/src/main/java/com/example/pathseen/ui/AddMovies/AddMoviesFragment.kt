@@ -7,37 +7,47 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.example.pathseen.databinding.FragmentAddGamesBinding
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pathseen.databinding.FragmentAddMoviesBinding
-import com.example.pathseen.ui.AddGames.AddGamesViewModel
+import com.example.pathseen.serverMovies.model.Movie
 
 
 class AddMoviesFragment : Fragment() {
     private var _binding: FragmentAddMoviesBinding? = null
     private val binding get() = _binding!!
+    private lateinit var addMoviesViewModel : AddMoviesViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentAddMoviesBinding.inflate(inflater, container, false)
+        addMoviesViewModel = ViewModelProvider(this).get(AddMoviesViewModel::class.java)
         val root: View = binding.root
 
-        val addMoviesViewModel = ViewModelProvider(this).get(AddMoviesViewModel::class.java)
+        val movieList =ArrayList<Movie>()
+        val addMoviesAdapter = AddMoviesAdapter(movieList, onItemClicked = {movie -> onItemClicked(movie)})
 
-        addMoviesViewModel.errorMsg.observe(viewLifecycleOwner){errorMsg->
-            Toast.makeText(requireActivity(), errorMsg, Toast.LENGTH_LONG).show()
+        binding.moviesRecyclerview.apply{
+            layoutManager = LinearLayoutManager(this@AddMoviesFragment.requireContext())
+            adapter=addMoviesAdapter
+            setHasFixedSize(false)
         }
 
-        addMoviesViewModel.createMovieSuccess.observe(viewLifecycleOwner){
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
+        addMoviesViewModel.loadMovies()
 
-        binding.saveButton.setOnClickListener(){
-            val nameMovie= binding.gamesExampleEditText.text.toString()
-            val genreMovie= binding.genrGamesEditText.text.toString()
-            val scoreMovie= binding.scoreGamesEditText.text.toString()
-            addMoviesViewModel.saveMovie(nameMovie,genreMovie,scoreMovie)
+        addMoviesViewModel.moviesLoaded.observe(viewLifecycleOwner){listMovies->
+            addMoviesAdapter.appendItems(listMovies as ArrayList<Movie>)
         }
 
         return root
     }
 
+    private fun onItemClicked(movie: Movie){
+        //findNavController().navigate(ListFragmentDirections.actionNavigationListToDetailFragment(movie = movie))
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
