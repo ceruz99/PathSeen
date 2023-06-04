@@ -21,14 +21,11 @@ class AddMoviesAdapter (
 
             fun bindMovie(movie: Movie){
                 with(binding){
-                    Picasso.get().load("https://image.tmdb.org/t/p/original"+movie.backdropPath).into(posterImageView)
+                    Picasso.get().load("https://image.tmdb.org/t/p/original"+movie.posterPath).into(posterImageView)
                     titleTextView.text=movie.title
                     creatorTitleTextView.text=""
                     creatorTextView.text=""
                     scoreTextView.text=movie.voteAverage.toString()
-                    imageView6.setOnClickListener{
-
-                    }
                 }
             }
 

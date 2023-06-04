@@ -11,8 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pathseen.R
 import com.example.pathseen.databinding.FragmentMoviesBinding
-import com.example.pathseen.model.Movie
-import com.example.pathseen.ui.Games.GamesAdapter
+import com.example.pathseen.model.MovieFS
 
 
 class MoviesFragment : Fragment() {
@@ -20,7 +19,7 @@ class MoviesFragment : Fragment() {
     private var _binding: FragmentMoviesBinding? = null
     private val binding get() = _binding!!
     private lateinit var moviesAdapter: MoviesAdapter
-    private var moviesList: ArrayList<Movie> = ArrayList()
+    private var moviesList: ArrayList<MovieFS> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val moviesViewModel = ViewModelProvider(this).get(MoviesViewModel::class.java)

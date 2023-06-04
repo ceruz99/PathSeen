@@ -59,7 +59,7 @@
     <string name="pending">Pending</string>
     <string name="gamesExample">Here will be the name of the game from an API</string>
     <string name="ejemploscore">4</string>
-    <string name="moviesExample">Here will be the name of a movie from an API.</string>
+    <string name="moviesExample">Here will be the name of a movieFS from an API.</string>
     <string name="titleExample">Title</string>
     <string name="creatorExample">Creator:</string>
 </resources>

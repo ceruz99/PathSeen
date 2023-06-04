@@ -66,7 +66,7 @@
             android:id="@+id/action_addMoviesFragment_to_navigation_movies"
             app:destination="@id/navigation_movies" />
         <argument
-            android:name="movie"
+            android:name="movieFS"
             app:argType="com.example.pathseen.serverMovies.model.Movie" />
     </fragment>
 </navigation>

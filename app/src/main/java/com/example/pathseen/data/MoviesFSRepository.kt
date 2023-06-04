@@ -1,6 +1,6 @@
 package com.example.pathseen.data
 
-import com.example.pathseen.model.Movie
+import com.example.pathseen.model.MovieFS
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
@@ -11,18 +11,18 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
-class MoviesRepository {
+class MoviesFSRepository {
     private var db = Firebase.firestore
     private var auth : FirebaseAuth = Firebase.auth
 
-    suspend fun saveMovie(movie: Movie): ResourceRemote<String?> {
+    suspend fun saveMovie(movieFS: MovieFS): ResourceRemote<String?> {
         return try {
             val uid = auth.currentUser?.uid
             val path=uid?.let { db.collection("users").document(it).collection("movies")}
             val documentBook=path?.document()
-            movie.id = documentBook?.id
-            movie.id?.let { path?.document(it)?.set(movie)?.await() }
-            ResourceRemote.Success(data = movie.id)
+            movieFS.id = documentBook?.id
+            movieFS.id?.let { path?.document(it)?.set(movieFS)?.await() }
+            ResourceRemote.Success(data = movieFS.id)
         } catch (e: FirebaseFirestoreException){
             ResourceRemote.Error(message = e.localizedMessage)
         } catch(e: FirebaseNetworkException){

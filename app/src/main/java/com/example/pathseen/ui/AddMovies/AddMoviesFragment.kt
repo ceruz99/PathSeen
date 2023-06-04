@@ -24,6 +24,10 @@ class AddMoviesFragment : Fragment() {
         addMoviesViewModel = ViewModelProvider(this).get(AddMoviesViewModel::class.java)
         val root: View = binding.root
 
+        addMoviesViewModel.errorMsg.observe(viewLifecycleOwner){errorMsg->
+            Toast.makeText(requireActivity(), errorMsg, Toast.LENGTH_LONG).show()
+        }
+
         val movieList =ArrayList<Movie>()
         val addMoviesAdapter = AddMoviesAdapter(movieList, onItemClicked = {movie -> onItemClicked(movie)})
 
@@ -43,7 +47,7 @@ class AddMoviesFragment : Fragment() {
     }
 
     private fun onItemClicked(movie: Movie){
-        //findNavController().navigate(ListFragmentDirections.actionNavigationListToDetailFragment(movie = movie))
+        addMoviesViewModel.saveMovies(movie.title,"",movie.voteAverage.toString(),"https://image.tmdb.org/t/p/original"+movie.posterPath)
     }
 
     override fun onDestroyView() {

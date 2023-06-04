@@ -6,21 +6,23 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pathseen.R
 import com.example.pathseen.databinding.CardViewBookItemBinding
-import com.example.pathseen.model.Movie
+import com.example.pathseen.model.MovieFS
+import com.squareup.picasso.Picasso
 
 class MoviesAdapter(
-    private val moviesList : ArrayList<Movie>,
-    private val onItemClicked: (Movie) -> Unit,
+    private val moviesList : ArrayList<MovieFS>,
+    private val onItemClicked: (MovieFS) -> Unit,
 ) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>(){
 
 
     class MoviesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         private val binding = CardViewBookItemBinding.bind(itemView)
-        fun bind(movie: Movie){
+        fun bind(movieFS: MovieFS){
             with(binding){
-                nameTextView.text=movie.name
-                genreTextView.text=movie.genre
-                scoreTextView.text=movie.score
+                nameTextView.text=movieFS.name
+                genreTextView.text=movieFS.creator
+                scoreTextView.text=movieFS.score
+                Picasso.get().load(movieFS.img).into(imageView4)
             }
         }
     }
@@ -38,7 +40,7 @@ class MoviesAdapter(
         holder.itemView.setOnClickListener{onItemClicked(moviesList[position])}
     }
 
-    fun appendItems(newList: ArrayList<Movie>){
+    fun appendItems(newList: ArrayList<MovieFS>){
         moviesList.clear()
         moviesList.addAll(newList)
         notifyDataSetChanged()
