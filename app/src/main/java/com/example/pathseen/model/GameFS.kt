@@ -1,6 +1,6 @@
 package com.example.pathseen.model
 
-data class Game (
+data class GameFS (
     var id: String?= null,
     var name: String?= null,
     var genre: String?= null,

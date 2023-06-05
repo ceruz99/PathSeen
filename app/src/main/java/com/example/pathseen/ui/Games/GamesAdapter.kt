@@ -6,20 +6,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pathseen.R
 import com.example.pathseen.databinding.CardViewBookItemBinding
-import com.example.pathseen.model.Game
+import com.example.pathseen.model.GameFS
 
 class GamesAdapter (
-    private val gamesList : ArrayList<Game>,
-    private val onItemClicked: (Game) -> Unit,
+    private val gamesList : ArrayList<GameFS>,
+    private val onItemClicked: (GameFS) -> Unit,
 ): RecyclerView.Adapter<GamesAdapter.GamesViewHolder>(){
 
     class GamesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         private val binding = CardViewBookItemBinding.bind(itemView)
-        fun bind(game : Game){
+        fun bind(gameFS : GameFS){
             with(binding){
-                nameTextView.text=game.name
-                genreTextView.text=game.genre
-                scoreTextView.text=game.score
+                nameTextView.text=gameFS.name
+                genreTextView.text=gameFS.genre
+                scoreTextView.text=gameFS.score
             }
         }
     }
@@ -37,7 +37,7 @@ class GamesAdapter (
         holder.itemView.setOnClickListener{onItemClicked(gamesList[position])}
     }
 
-    fun appendItems(newList: ArrayList<Game>){
+    fun appendItems(newList: ArrayList<GameFS>){
         gamesList.clear()
         gamesList.addAll(newList)
         notifyDataSetChanged()

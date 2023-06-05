@@ -6,41 +6,44 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pathseen.data.ResourceRemote
 import com.example.pathseen.data.GamesRepository
-import com.example.pathseen.model.Game
+import com.example.pathseen.model.GameFS
+import com.example.pathseen.serverGames.model.Game
+import com.example.pathseen.serverGames.model.GamesList
+import com.example.pathseen.serverGames.repository.GamesServerRepository
 import kotlinx.coroutines.launch
 
 class AddGamesViewModel : ViewModel(){
-
-    private val gamesRepository = GamesRepository()
+    val gamesRepository = GamesRepository()
+    val gamesServerRepository = GamesServerRepository()
 
     private val _errorMsg: MutableLiveData<String?> = MutableLiveData()
     val errorMsg: LiveData<String?> = _errorMsg
 
-    private val _createGameSuccess: MutableLiveData<String?> = MutableLiveData()
-    val createGameSuccess: LiveData<String?> = _createGameSuccess
-
-    fun saveGame(nameGame: String, genreGame: String, scoreGame: String) {
-        if(nameGame.isEmpty() || genreGame.isEmpty()){
-            _errorMsg.postValue("You must fulfill all the fields.")
+    private val  _gamesLoaded : MutableLiveData< List<Game>> = MutableLiveData()
+    val gamesLoaded: LiveData< List<Game>> = _gamesLoaded
+    fun loadMovies() {
+        viewModelScope.launch {
+            val gamesList : GamesList = gamesServerRepository.loadMovies()
+            _gamesLoaded.postValue(gamesList.games)
         }
-        else{
-            viewModelScope.launch {
-                val game= Game(name = nameGame, genre = genreGame, score = scoreGame)
-                val result = gamesRepository.saveGame(game)
-                result.let{resourceRemote->
-                    when(resourceRemote){
-                        is ResourceRemote.Success -> {
-                            _errorMsg.postValue("The game has been saved")
-                            _createGameSuccess.postValue(resourceRemote.data)
-                        }
-                        is ResourceRemote.Error -> {
-                            val msg = resourceRemote.message
-                            _errorMsg.postValue(msg)
-                        }
-                        else -> {}
+    }
+
+    /*fun saveMovies(name : String, creator: String, score: String, imagePath: String){
+        viewModelScope.launch {
+            val movieFS= MovieFS(name = name, creator = creator, score = score,img = imagePath)
+            val result = moviesFSRepository.saveMovie(movieFS)
+            result.let{resourceRemote->
+                when(resourceRemote){
+                    is ResourceRemote.Success -> {
+                        _errorMsg.postValue("The movie has been saved")
                     }
+                    is ResourceRemote.Error -> {
+                        val msg = resourceRemote.message
+                        _errorMsg.postValue(msg)
+                    }
+                    else -> {}
                 }
             }
         }
-    }
+    }*/
 }

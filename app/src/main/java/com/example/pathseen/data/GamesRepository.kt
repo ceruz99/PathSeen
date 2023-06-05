@@ -1,6 +1,6 @@
 package com.example.pathseen.data
 
-import com.example.pathseen.model.Game
+import com.example.pathseen.model.GameFS
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
@@ -15,14 +15,14 @@ class GamesRepository {
     private var db = Firebase.firestore
     private var auth : FirebaseAuth = Firebase.auth
 
-    suspend fun saveGame(game: Game): ResourceRemote<String?> {
+    suspend fun saveGame(gameFS: GameFS): ResourceRemote<String?> {
         return try {
             val uid = auth.currentUser?.uid
             val path=uid?.let { db.collection("users").document(it).collection("games")}
             val documentBook=path?.document()
-            game.id = documentBook?.id
-            game.id?.let { path?.document(it)?.set(game)?.await() }
-            ResourceRemote.Success(data = game.id)
+            gameFS.id = documentBook?.id
+            gameFS.id?.let { path?.document(it)?.set(gameFS)?.await() }
+            ResourceRemote.Success(data = gameFS.id)
         } catch (e: FirebaseFirestoreException){
             ResourceRemote.Error(message = e.localizedMessage)
         } catch(e: FirebaseNetworkException){

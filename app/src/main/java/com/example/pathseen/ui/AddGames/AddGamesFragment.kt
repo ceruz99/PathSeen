@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pathseen.databinding.FragmentAddGamesBinding
+import com.example.pathseen.serverGames.model.Game
 import com.example.pathseen.ui.AddGames.AddGamesViewModel
 
 
@@ -29,17 +31,30 @@ class AddGamesFragment : Fragment() {
             Toast.makeText(requireActivity(), errorMsg, Toast.LENGTH_LONG).show()
         }
 
-        addGamesViewModel.createGameSuccess.observe(viewLifecycleOwner){
-            requireActivity().onBackPressedDispatcher.onBackPressed()
+        val gameList =ArrayList<Game>()
+        val addGamesAdapter = AddGamesAdapter(gameList, onItemClicked = {movie -> onItemClicked(movie)})
+
+        binding.gamesRecyclerview.apply{
+            layoutManager = LinearLayoutManager(this@AddGamesFragment.requireContext())
+            adapter=addGamesAdapter
+            setHasFixedSize(false)
         }
 
-        binding.saveButton.setOnClickListener(){
-            val nameGame= binding.gamesExampleEditText.text.toString()
-            val genreGame= binding.genrGamesEditText.text.toString()
-            val scoreGame= binding.scoreGamesEditText.text.toString()
-            addGamesViewModel.saveGame(nameGame,genreGame,scoreGame)
+        addGamesViewModel.loadMovies()
+
+        addGamesViewModel.gamesLoaded.observe(viewLifecycleOwner){listGames->
+            addGamesAdapter.appendItems(listGames as ArrayList<Game>)
         }
 
         return root
+    }
+
+    private fun onItemClicked(game: Game){
+        //addMoviesViewModel.saveMovies(movie.title,"",movie.voteAverage.toString(),"https://image.tmdb.org/t/p/original"+movie.posterPath)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
