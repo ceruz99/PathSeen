@@ -1,6 +1,7 @@
 package com.example.pathseen.ui.AddMovies
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,8 +27,14 @@ class AddMoviesFragment : Fragment() {
             Toast.makeText(requireActivity(), errorMsg, Toast.LENGTH_LONG).show()
         }
 
+        val listener = object : AddMoviesAdapter.OnItemClickListener {
+            override fun onItemClick(movie: Movie) {
+                addMoviesViewModel.saveMovies(movie.title,"",movie.voteAverage.toString(),"https://image.tmdb.org/t/p/original"+movie.posterPath)
+                Log.d("Guardando","listo")
+            }
+        }
         val movieList =ArrayList<Movie>()
-        val addMoviesAdapter = AddMoviesAdapter(movieList, onItemClicked = {movie -> onItemClicked(movie)})
+        val addMoviesAdapter = AddMoviesAdapter(movieList, listener)
 
         binding.moviesRecyclerview.apply{
             layoutManager = LinearLayoutManager(this@AddMoviesFragment.requireContext())
@@ -45,7 +52,7 @@ class AddMoviesFragment : Fragment() {
     }
 
     private fun onItemClicked(movie: Movie){
-        addMoviesViewModel.saveMovies(movie.title,"",movie.voteAverage.toString(),"https://image.tmdb.org/t/p/original"+movie.posterPath)
+        //as
     }
 
     override fun onDestroyView() {

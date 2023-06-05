@@ -20,12 +20,12 @@ class AddBooksAdapter (
 
     class BooksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val binding= CardViewListsBinding.bind(itemView)
-
+        private val context = itemView.context
         fun bindBook(book: Item){
             with(binding){
-                //val imageUrl = Picasso.get().load(book.bookServer.imageLinks?.thumbnail)
-                //Glide.with(requireContext()).load(imageUrl).into(posterImageView)
-                Picasso.get().load(book.bookServer.imageLinks?.thumbnail).into(posterImageView)
+                //val imageUrl = Picasso.get().load()
+                Glide.with(context).load(book.bookServer.imageLinks?.thumbnail).into(posterImageView)
+                //Picasso.get().load(book.bookServer.imageLinks?.thumbnail).into(posterImageView)
                 titleTextView.text=book.bookServer.title
                 creatorTitleTextView.text="Author"
                 creatorTextView.text=book.bookServer.authors[0]

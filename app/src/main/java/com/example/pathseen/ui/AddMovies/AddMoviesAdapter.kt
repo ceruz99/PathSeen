@@ -13,19 +13,24 @@ import com.squareup.picasso.Picasso
 
 class AddMoviesAdapter (
     private var moviesList: ArrayList<Movie>,
-    private val onItemClicked: (Movie) -> Unit
+    private val listener: OnItemClickListener
     ): RecyclerView.Adapter<AddMoviesAdapter.MoviesViewHolder>(){
-
+        interface OnItemClickListener {
+            fun onItemClick(movie: Movie)
+        }
         class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
             private val binding= CardViewListsBinding.bind(itemView)
 
-            fun bindMovie(movie: Movie){
+            fun bindMovie(movie: Movie, listener : OnItemClickListener ){
                 with(binding){
                     Picasso.get().load("https://image.tmdb.org/t/p/original"+movie.posterPath).into(posterImageView)
                     titleTextView.text=movie.title
                     creatorTitleTextView.text=""
                     creatorTextView.text=""
                     scoreTextView.text=movie.voteAverage.toString()
+                    favoriteImageView.setOnClickListener{
+                        listener.onItemClick(movie)
+                    }
                 }
             }
 
@@ -41,8 +46,8 @@ class AddMoviesAdapter (
 
         override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
             val movie = moviesList[position]
-            holder.bindMovie(movie)
-            holder.itemView.setOnClickListener{onItemClicked(movie)}
+            holder.bindMovie(movie,listener)
+            //holder.itemView.setOnClickListener{onItemClicked(movie)}
         }
 
         fun appendItems(newList: ArrayList<Movie>){
