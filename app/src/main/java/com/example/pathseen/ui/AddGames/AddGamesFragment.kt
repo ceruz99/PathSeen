@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pathseen.databinding.FragmentAddGamesBinding
 import com.example.pathseen.serverGames.model.Game
-import com.example.pathseen.ui.AddGames.AddGamesViewModel
 
 
 class AddGamesFragment : Fragment() {
