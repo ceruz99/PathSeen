@@ -28,14 +28,14 @@ class AddGamesViewModel : ViewModel(){
         }
     }
 
-    /*fun saveMovies(name : String, creator: String, score: String, imagePath: String){
+    fun saveGames(name : String, creator: String, score: String, imagePath: String){
         viewModelScope.launch {
-            val movieFS= MovieFS(name = name, creator = creator, score = score,img = imagePath)
-            val result = moviesFSRepository.saveMovie(movieFS)
+            val gameFs= GameFS(name = name, creator = creator, score = score, image = imagePath)
+            val result = gamesRepository.saveGame(gameFs)
             result.let{resourceRemote->
                 when(resourceRemote){
                     is ResourceRemote.Success -> {
-                        _errorMsg.postValue("The movie has been saved")
+                        _errorMsg.postValue("The game has been saved")
                     }
                     is ResourceRemote.Error -> {
                         val msg = resourceRemote.message
@@ -45,5 +45,5 @@ class AddGamesViewModel : ViewModel(){
                 }
             }
         }
-    }*/
+    }
 }

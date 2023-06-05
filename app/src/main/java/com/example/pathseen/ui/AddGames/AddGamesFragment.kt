@@ -17,6 +17,7 @@ class AddGamesFragment : Fragment() {
 
     private var _binding: FragmentAddGamesBinding? = null
     private val binding get() = _binding!!
+    private lateinit var addGamesViewModel : AddGamesViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -25,7 +26,7 @@ class AddGamesFragment : Fragment() {
         _binding = FragmentAddGamesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val addGamesViewModel = ViewModelProvider(this).get(AddGamesViewModel::class.java)
+        addGamesViewModel = ViewModelProvider(this).get(AddGamesViewModel::class.java)
 
         addGamesViewModel.errorMsg.observe(viewLifecycleOwner){errorMsg->
             Toast.makeText(requireActivity(), errorMsg, Toast.LENGTH_LONG).show()
@@ -50,7 +51,7 @@ class AddGamesFragment : Fragment() {
     }
 
     private fun onItemClicked(game: Game){
-        //addMoviesViewModel.saveMovies(movie.title,"",movie.voteAverage.toString(),"https://image.tmdb.org/t/p/original"+movie.posterPath)
+        addGamesViewModel.saveGames(game.name,"",game.rating.toString(),game.backgroundImage)
     }
 
     override fun onDestroyView() {

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pathseen.R
 import com.example.pathseen.databinding.CardViewBookItemBinding
 import com.example.pathseen.model.GameFS
+import com.squareup.picasso.Picasso
 
 class GamesAdapter (
     private val gamesList : ArrayList<GameFS>,
@@ -18,8 +19,9 @@ class GamesAdapter (
         fun bind(gameFS : GameFS){
             with(binding){
                 nameTextView.text=gameFS.name
-                genreTextView.text=gameFS.genre
+                genreTextView.text=gameFS.creator
                 scoreTextView.text=gameFS.score
+                Picasso.get().load(gameFS.image).into(imageView4)
             }
         }
     }
