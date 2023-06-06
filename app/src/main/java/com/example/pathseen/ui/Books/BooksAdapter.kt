@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pathseen.R
 import com.example.pathseen.databinding.CardViewBookItemBinding
 import com.example.pathseen.model.Book
+import com.squareup.picasso.Picasso
 
 class BooksAdapter (
     private val booksList : ArrayList<Book>,
@@ -38,8 +39,9 @@ class BooksAdapter (
         fun bind(book: Book){
             with(binding){
                 nameTextView.text=book.name
-                genreTextView.text=book.genre
+                genreTextView.text=book.author
                 scoreTextView.text=book.score
+                Picasso.get().load(book.image).into(imageView4)
             }
         }
     }

@@ -33,8 +33,6 @@ class AddMoviesAdapter (
                     }
                 }
             }
-
-
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
@@ -47,7 +45,6 @@ class AddMoviesAdapter (
         override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
             val movie = moviesList[position]
             holder.bindMovie(movie,listener)
-            //holder.itemView.setOnClickListener{onItemClicked(movie)}
         }
 
         fun appendItems(newList: ArrayList<Movie>){

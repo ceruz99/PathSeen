@@ -31,15 +31,14 @@ class AddBooksViewModel: ViewModel() {
         }
     }
 
-    /*fun saveBooks(title: String, author: String, score: String, poster: String) {
+    fun saveBooks(title: String, author: String, score: String, poster: String?) {
         viewModelScope.launch {
-            val book= Book(name = nameBook, genre = genreBook, score = scoreBook)
+            val book= Book(name = title, author = author, score = score, image = poster)
             val result = booksRepository.saveBook(book)
             result.let{resourceRemote->
                 when(resourceRemote){
                     is ResourceRemote.Success -> {
                         _errorMsg.postValue("The bookServer has been saved")
-                        _createBookSuccess.postValue(resourceRemote.data)
                     }
                     is ResourceRemote.Error -> {
                         val msg = resourceRemote.message
@@ -49,7 +48,7 @@ class AddBooksViewModel: ViewModel() {
                 }
             }
         }
-    }*/
+    }
 
 }
 

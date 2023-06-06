@@ -11,19 +11,25 @@ import com.squareup.picasso.Picasso
 
 class AddGamesAdapter (
     private var gamesList: ArrayList<Game>,
-    private val onItemClicked: (Game) -> Unit
+    private val listener: OnItemClickListener
     ): RecyclerView.Adapter<AddGamesAdapter.GamesViewHolder>(){
 
+        interface OnItemClickListener {
+            fun onItemClick(game: Game)
+        }
         class GamesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
             private val binding= CardViewListsBinding.bind(itemView)
 
-            fun bindGame(game: Game){
+            fun bindGame(game: Game, listener : OnItemClickListener){
                 with(binding){
                     Picasso.get().load(game.backgroundImage).into(posterImageView)
                     titleTextView.text=game.name
                     creatorTitleTextView.text=""
                     creatorTextView.text=""
                     scoreTextView.text=game.rating.toString()
+                    favoriteImageView.setOnClickListener{
+                        listener.onItemClick(game)
+                    }
                 }
             }
 
@@ -39,8 +45,8 @@ class AddGamesAdapter (
 
         override fun onBindViewHolder(holder: GamesViewHolder, position: Int) {
             val game = gamesList[position]
-            holder.bindGame(game)
-            holder.itemView.setOnClickListener{onItemClicked(game)}
+            holder.bindGame(game,listener)
+            //holder.itemView.setOnClickListener{onItemClicked(game)}
         }
 
         fun appendItems(newList: ArrayList<Game>){

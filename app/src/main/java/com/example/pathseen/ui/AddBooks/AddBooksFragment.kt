@@ -1,6 +1,7 @@
 package com.example.pathseen.ui.AddBooks
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pathseen.databinding.FragmentAddBooksBinding
 import com.example.pathseen.serverBooks.model.BookServer
 import com.example.pathseen.serverBooks.model.Item
+import com.example.pathseen.serverMovies.model.Movie
+import com.example.pathseen.ui.AddMovies.AddMoviesAdapter
 
 class AddBooksFragment : Fragment() {
 
     private var _binding: FragmentAddBooksBinding? = null
     private val binding get() = _binding!!
     private lateinit var addBooksViewModel : AddBooksViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentAddBooksBinding.inflate(inflater, container, false)
         addBooksViewModel = ViewModelProvider(this).get(AddBooksViewModel::class.java)
@@ -29,8 +29,15 @@ class AddBooksFragment : Fragment() {
             Toast.makeText(requireActivity(), errorMsg, Toast.LENGTH_LONG).show()
         }
 
+        val listener = object : AddBooksAdapter.OnItemClickListener {
+            override fun onItemClick(book: Item) {
+                addBooksViewModel.saveBooks(book.bookServer.title,book.bookServer.authors[0],book.bookServer.averageRating.toString(),book.bookServer.imageLinks?.thumbnail)
+                Log.d("Guardando","listo")
+            }
+        }
+
         val bookList = ArrayList<Item>()
-        val addBooksAdapter = AddBooksAdapter(bookList,onItemClicked = {book -> onItemClicked(book.bookServer)})
+        val addBooksAdapter = AddBooksAdapter(bookList,listener)
 
         binding.booksRecyclerview.apply{
             layoutManager = LinearLayoutManager(this@AddBooksFragment.requireContext())
@@ -48,13 +55,9 @@ class AddBooksFragment : Fragment() {
 
 
     }
-    private fun onItemClicked(book: BookServer){
-        //addBooksViewModel.saveBooks(book.title,book.authors[0],book.averageRating.toString(),book.imageLinks.thumbnail)
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

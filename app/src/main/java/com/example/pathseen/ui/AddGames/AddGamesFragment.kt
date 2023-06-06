@@ -17,9 +17,6 @@ class AddGamesFragment : Fragment() {
     private var _binding: FragmentAddGamesBinding? = null
     private val binding get() = _binding!!
     private lateinit var addGamesViewModel : AddGamesViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentAddGamesBinding.inflate(inflater, container, false)
@@ -31,8 +28,13 @@ class AddGamesFragment : Fragment() {
             Toast.makeText(requireActivity(), errorMsg, Toast.LENGTH_LONG).show()
         }
 
+        val listener = object : AddGamesAdapter.OnItemClickListener {
+            override fun onItemClick(game: Game) {
+                addGamesViewModel.saveGames(game.name,"",game.rating.toString(),game.backgroundImage)
+            }
+        }
         val gameList =ArrayList<Game>()
-        val addGamesAdapter = AddGamesAdapter(gameList, onItemClicked = {movie -> onItemClicked(movie)})
+        val addGamesAdapter = AddGamesAdapter(gameList, listener)
 
         binding.gamesRecyclerview.apply{
             layoutManager = LinearLayoutManager(this@AddGamesFragment.requireContext())
@@ -47,10 +49,6 @@ class AddGamesFragment : Fragment() {
         }
 
         return root
-    }
-
-    private fun onItemClicked(game: Game){
-        addGamesViewModel.saveGames(game.name,"",game.rating.toString(),game.backgroundImage)
     }
 
     override fun onDestroyView() {

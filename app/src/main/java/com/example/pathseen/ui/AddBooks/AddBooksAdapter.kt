@@ -10,26 +10,28 @@ import com.example.pathseen.R
 import com.example.pathseen.databinding.CardViewListsBinding
 import com.example.pathseen.serverBooks.model.BookServer
 import com.example.pathseen.serverBooks.model.Item
-import com.squareup.picasso.Picasso
 
 
 class AddBooksAdapter (
     private var booksList: ArrayList<Item>,
-    private val onItemClicked : (Item) -> Unit
+    private val listener : OnItemClickListener
         ): RecyclerView.Adapter<AddBooksAdapter.BooksViewHolder>(){
-
+    interface OnItemClickListener {
+        fun onItemClick(book: Item)
+    }
     class BooksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val binding= CardViewListsBinding.bind(itemView)
         private val context = itemView.context
-        fun bindBook(book: Item){
+        fun bindBook(book: Item,listener: OnItemClickListener){
             with(binding){
-                //val imageUrl = Picasso.get().load()
                 Glide.with(context).load(book.bookServer.imageLinks?.thumbnail).into(posterImageView)
-                //Picasso.get().load(book.bookServer.imageLinks?.thumbnail).into(posterImageView)
                 titleTextView.text=book.bookServer.title
                 creatorTitleTextView.text="Author"
                 creatorTextView.text=book.bookServer.authors[0]
                 scoreTextView.text=book.bookServer.averageRating.toString()
+                favoriteImageView.setOnClickListener{
+                    listener.onItemClick(book)
+                }
             }
         }
 
@@ -44,8 +46,7 @@ class AddBooksAdapter (
 
     override fun onBindViewHolder(holder: AddBooksAdapter.BooksViewHolder, position: Int) {
         val book = booksList[position]
-        holder.bindBook(book)
-        holder.itemView.setOnClickListener{onItemClicked(book)}
+        holder.bindBook(book, listener)
     }
 
     fun appendItems(newList: ArrayList<BookServer>){
